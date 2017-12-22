@@ -1,5 +1,6 @@
 package com.ly.ribbon.controller;
 
+import com.ly.ribbon.service.DemoService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,10 @@ import org.springframework.web.client.RestTemplate;
 public class RibbonController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private DemoService demoService;
 
-    @RequestMapping(value="/ribbon" ,method = RequestMethod.GET)
-    public String send(HttpServletRequest request){
-        String url = "http://demo-server/holle";
-        return restTemplate.getForEntity(url,String.class).getBody();
+    @RequestMapping(value = "/ribbon", method = RequestMethod.GET)
+    public String send(HttpServletRequest request) {
+        return demoService.holle();
     }
 }
